@@ -5,31 +5,28 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public bool playerRight = false;
-    public int position = 0;
     public int maxPosition = 5;
+    private int _position = 0;
 
     public GameObject[] soldiers;
 
-    int pointerToSoldier = 0;
+    private int _pointerToSoldier = 0;
     GameObject pointerToSoldierPrefab;
 
     string str_player;
-    Quaternion soldierRotation;
 
 	// Use this for initialization
 	void Start () {
         if(playerRight)
         {
             str_player = "P2";
-            soldierRotation = Quaternion.Euler(-90f, 0f, 0f);
         }
         else
         {
             str_player = "P1";
-            soldierRotation = Quaternion.Euler(-90f, 180f, 0f);
         }
 
-        pointerToSoldierPrefab = Instantiate(soldiers[pointerToSoldier], transform.position, soldierRotation);
+        pointerToSoldierPrefab = Instantiate(soldiers[_pointerToSoldier], transform.position, transform.rotation);
         pointerToSoldierPrefab.transform.parent = transform;
 	}
 	
@@ -47,34 +44,34 @@ public class PlayerController : MonoBehaviour {
     {
         if (Input.GetButtonDown(str_player + "Up"))
         {
-            if(position < maxPosition-1)
+            if(_position < maxPosition-1)
             {
-                position++;
+                _position++;
             }
         }
         if (Input.GetButtonDown(str_player + "Down"))
         {
-            if (position > 0)
+            if (_position > 0)
             {
-                position--;
+                _position--;
             }
         }
-        transform.position = new Vector3(transform.position.x, 0f, position);
+        transform.position = new Vector3(transform.position.x, 0f, _position);
     }
 
     void ChangeSoldier()
     {
-        if(pointerToSoldier < soldiers.Length - 1)
+        if(_pointerToSoldier < soldiers.Length - 1)
         {
-            pointerToSoldier++;
+            _pointerToSoldier++;
         }
         else
         {
-            pointerToSoldier = 0;
+            _pointerToSoldier = 0;
         }
 
         Destroy(pointerToSoldierPrefab);
-        pointerToSoldierPrefab = Instantiate(soldiers[pointerToSoldier], transform.position, soldierRotation);
+        pointerToSoldierPrefab = Instantiate(soldiers[_pointerToSoldier], transform.position, transform.rotation);
         pointerToSoldierPrefab.transform.parent = transform;
 
     }

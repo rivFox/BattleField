@@ -30,8 +30,8 @@ public class BoardController : MonoBehaviour {
                 Instantiate(plane, new Vector3(ix, 0f, iz + iz*margin), Quaternion.Euler(0f, 0f, 0f));
             }
         }
-        Instantiate(playerLeft, new Vector3(-1, 0f, 0f), Quaternion.Euler(0f, 0f, 0f));
-        Instantiate(playerRight, new Vector3(_x, 0f, 0f), Quaternion.Euler(0f, 0f, 0f));  
+        Instantiate(playerLeft, new Vector3(-1, 0f, 0f), Quaternion.Euler(-90f, 0f, 180f));
+        Instantiate(playerRight, new Vector3(_x, 0f, 0f), Quaternion.Euler(-90f, 0f, 0f));
     }
     
 }
